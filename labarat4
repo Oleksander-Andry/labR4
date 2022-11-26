@@ -1,0 +1,118 @@
+using System;
+
+class Program
+{
+    public static void Main()
+    {
+        Console.WriteLine("Place, basic class");
+        
+        Place place = new Place("Place");
+        place.PrintInfo();
+        Console.WriteLine(place.GetName());
+
+        
+        Console.WriteLine();
+        Megapolis metropolis = new Megapolis("Big-city", 500, new float[] { 45.1544f, 48.51545f });
+        metropolis.PrintPopulation();
+        metropolis.PrintInfo();
+        Console.WriteLine(metropolis.GetName());
+
+        Console.WriteLine();
+        City city = new City("Kyiv", 3000000, 100);
+        city.PrintArea();
+        city.PrintInfo();
+        Console.WriteLine(city.GetName());
+
+        Console.WriteLine();
+        Oblast oblast = new Oblast("Cherkaska", 2000000, 20000);
+        oblast.PrintArea();
+        oblast.PrintInfo();
+        Console.WriteLine(oblast.GetName());
+    }
+}
+
+public class Place
+{
+    private string name;
+
+    public Place(string name)
+    {
+        this.name = name;
+    }
+
+    public string GetName()
+    {
+        return name;
+    }
+
+    public void PrintInfo()
+    {
+        Console.WriteLine($"The name of the place {name}");
+    }
+}
+
+class Megapolis : Place
+{
+    private int population;
+    private float[] coordination;
+
+    public Megapolis(string name, int population, float[] coordination) : base(name)
+    {
+        this.population = population;
+        this.coordination = coordination;
+    }
+
+    public void PrintPopulation()
+    {
+        Console.WriteLine($"Number of people: {population}");
+    }
+
+    public new void PrintInfo()
+    {
+        Console.WriteLine($"The name of the metropolis {GetName()}.Number of people: {population}." +
+            $" Coordinates {coordination[0]}, {coordination[1]}");
+    }
+}
+
+class City : Place
+{
+    private int population;
+    private float area;
+    public City(string name, int population, float area) : base(name)
+    {
+        this.population = population;
+        this.area = area;
+    }
+
+    public void PrintArea()
+    {
+        Console.WriteLine($"Area: {area} km`2");
+    }
+
+    public new void PrintInfo()
+    {
+        Console.WriteLine("City: " + GetName() + ". Area " + area + " km`2" + ". Number of people: " + population);
+    }
+}
+
+class Oblast : Place
+{
+    private int population;
+    private float area;
+
+    public Oblast(string name, int population, float area) : base(name)
+    {
+        this.population = population;
+        this.area = area;
+    }
+
+    public void PrintArea()
+    {
+        Console.WriteLine($"Population: {population}");
+    }
+
+    public new void PrintInfo()
+    {
+        Console.WriteLine("Region: " + GetName() + ". Area " + area + " km`2" + ". Number of people: " + population);
+    }
+}
